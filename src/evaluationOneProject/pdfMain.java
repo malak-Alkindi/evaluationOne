@@ -87,45 +87,45 @@ public class pdfMain {
 			  int pages = search.getNumberOfPages();
 		  
 		  String[] words=null; // Iterate the pdf through pages. 
-		  for (int ii = 1; ii <=pages; ii++) { // Extract the page content using PdfTextExtractor.
+		//  for (int ii = 1; ii <=pages; ii++) { // Extract the page content using PdfTextExtractor.
 		  
-		  String pageContent = PdfTextExtractor.getTextFromPage(search, ii);
+		  String pageContent = PdfTextExtractor.getTextFromPage(search, 1);
 		  
 		  
 		  words=pageContent.split(" ");
 		  
 		 
-		  for (String word : usersSearch) { for (String n : words) {
+		  for (String word : usersSearch)
+		  { for (String n : words) {
 		 System.out.println(word);
 		  
-		  if (word.equals(word)) {
+		  if (n.equals(word)) {
 		  
-		  count++; } } }
+			  new File(word).mkdirs(); 
+			  InputStream in = null;
+			  OutputStream out = null; 
+			  File oldFile = new File("File" + i + ".pdf"); File newFile = new File(
+					  "C:\\Users\\Lenovo\\eclipse-workspace\\evaluationOneProject\\"+word+"\\"+"File" + i + ".pdf");
+					 
+					 in = new FileInputStream(oldFile); 
+					 out = new FileOutputStream(newFile);
+					 
+					 byte[] moveBuff = new byte[1024];
+					  
+					 int butesRead;
+					 
+					  while ((butesRead = in.read(moveBuff)) > 0) { out.write(moveBuff, 0,
+					  butesRead); }
+					  
+					  in.close(); out.close();
+					 
+					 
+					  
+					  } System.out.println(i + "= " + count + pageContent); }} }
 		  
 		  
 		  
 		  
-		  if (count > 0) { new File(pageContent).mkdirs(); InputStream in = null;
-		  OutputStream out = null;
-		  
-		  File oldFile = new File("File" + i + ".pdf"); File newFile = new File(
-		  "C:\\Users\\Lenovo\\eclipse-workspace\\evaluationOneProject\\"+pageContent+"\\"+"File" + i + ".pdf");
-		 
-		 in = new FileInputStream(oldFile); out = new FileOutputStream(newFile);
-		 
-		 byte[] moveBuff = new byte[1024];
-		  
-		 int butesRead;
-		 
-		  while ((butesRead = in.read(moveBuff)) > 0) { out.write(moveBuff, 0,
-		  butesRead); }
-		  
-		  in.close(); out.close();
-		 
-		 
-		  
-		  } System.out.println(i + "= " + count + pageContent); } count = 0; }
-		  
-		  }
+	}
 
 }
