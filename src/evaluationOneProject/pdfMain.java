@@ -31,106 +31,101 @@ public class pdfMain {
 		Random random = new Random();
 		boolean listFlag = true;
 
-		/*
-		 * System.out.
-		 * println("enter words you want to add to your list and then to file ");
-		 * while(listFlag) { usersInput.add(sc.nextLine());
-		 * System.out.print("do you want to add another word y/n?   ");
-		 * if(sc.nextLine().toLowerCase().endsWith("y")) { listFlag=true;
-		 * System.out.println("type the new word"); }else { listFlag=false; } }
-		 * 
-		 * 
-		 * 
-		 * for(Integer i =0 ;i<100;i++) {
-		 * 
-		 * try { //Create Document instance. Document document = new Document();
-		 * 
-		 * //Create OutputStream instance. OutputStream outputStream = new
-		 * FileOutputStream(new File("File"+i+".pdf"));
-		 * 
-		 * //Create PDFWriter instance. PdfWriter.getInstance(document, outputStream);
-		 * 
-		 * //Open the document. document.open(); int index =
-		 * random.nextInt(usersInput.size()); //Add content to the document.
-		 * document.add(new Paragraph(usersInput.get(index)));
-		 * 
-		 * //Close document and outputStream. document.close(); outputStream.close();
-		 * 
-		 * 
-		 * } catch (Exception e) { e.printStackTrace(); }
-		 * 
-		 * 
-		 * 
-		 * 
-		 * }
-		 */
-		ArrayList<String> usersSearch = new ArrayList<>();
-		boolean searchFlag = true;
-		System.out.println("add words to search");
-		while (searchFlag) {
-			usersSearch.add(sc.nextLine());
-			System.out.print("do you want to add another word to seach y/n?   ");
+		System.out.println("enter words you want to add to your list and then to file ");
+		while (listFlag) {
+			usersInput.add(sc.nextLine());
+			System.out.print("do you want to add another word y/n?   ");
 			if (sc.nextLine().toLowerCase().endsWith("y")) {
-				searchFlag = true;
+				listFlag = true;
 				System.out.println("type the new word");
 			} else {
-				searchFlag = false;
+				listFlag = false;
 			}
 		}
-		int count = 0;
-		for (int i = 0; i < 100; i++) {
-			PdfReader pdfReader = new PdfReader("File" + i + ".pdf");
 
-			int pages = pdfReader.getNumberOfPages();
+		for (Integer i = 0; i < 100; i++) {
 
+			try { // Create Document instance
+				Document document = new Document();
+
+				// Create OutputStream instance.
+				OutputStream outputStream = new FileOutputStream(new File("File" + i + ".pdf"));
+
+				// Create PDFWriter instance.
+				PdfWriter.getInstance(document, outputStream);
+
+				// Open the document.
+				document.open();
+				int index = random.nextInt(usersInput.size()); // Add content to the document.
+				document.add(new Paragraph(usersInput.get(index)));
+
+				// Close document and outputStream.
+				document.close();
+				outputStream.close();
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
+		}
 		
-			// Iterate the pdf through pages.
-			for (int ii = 1; ii <= pages; ii++) {
-				// Extract the page content using PdfTextExtractor.
-
-				String pageContent = PdfTextExtractor.getTextFromPage(pdfReader, ii);
-				for (String word : usersSearch) {
-
-					if (pageContent.equals(word)) {
-
-						count++;
-					}
-
-				}
-		
-				
-				
+		ArrayList<String> usersSearch = new ArrayList<>();
+		boolean searchFlag = true;
+		  System.out.println("add words to search");
+		  while (searchFlag) {
+		 usersSearch.add(sc.nextLine());
+		 System.out.print("do you want to add another word to seach y/n?   ");
+		 if(sc.nextLine().toLowerCase().endsWith("y")) {
+			 searchFlag = true;
+		  System.out.println("type the new word");
+		  } else
+		  { searchFlag = false; } }
+		  int count = 0; 
+		  for (int i = 0; i < 100; i++) {
+			  
+			  PdfReader search = new PdfReader("File" + i + ".pdf"); 
+			  int pages = search.getNumberOfPages();
+		  
+		  String[] words=null; // Iterate the pdf through pages. 
+		  for (int ii = 1; ii <=pages; ii++) { // Extract the page content using PdfTextExtractor.
+		  
+		  String pageContent = PdfTextExtractor.getTextFromPage(search, ii);
+		  
+		  
+		  words=pageContent.split(" ");
+		  
 		 
-				if (count > 0) {
-					new File(pageContent).mkdirs();
-					  InputStream in = null;
-				        OutputStream out = null;
-				        
-				        File oldFile = new File("File" + i + ".pdf");
-			            File newFile = new File("C:\\Users\\Lenovo\\eclipse-workspace\\evaluationOneProject\\"+pageContent+"\\"+"File" + i + ".pdf");
-			 
-			            in = new FileInputStream(oldFile);
-			            out = new FileOutputStream(newFile);
-			 
-			            byte[] moveBuff = new byte[1024];
-			 
-			            int butesRead;
-			 
-			            while ((butesRead = in.read(moveBuff)) > 0) {
-			                out.write(moveBuff, 0, butesRead);
-			            }
-			 
-			            in.close();
-			            out.close();
-				
-			           
-
-				}
-				System.out.println(i + "= " + count + pageContent);
-			}
-			count = 0;
-		}
-
-	}
+		  for (String word : usersSearch) { for (String n : words) {
+		 System.out.println(word);
+		  
+		  if (word.equals(word)) {
+		  
+		  count++; } } }
+		  
+		  
+		  
+		  
+		  if (count > 0) { new File(pageContent).mkdirs(); InputStream in = null;
+		  OutputStream out = null;
+		  
+		  File oldFile = new File("File" + i + ".pdf"); File newFile = new File(
+		  "C:\\Users\\Lenovo\\eclipse-workspace\\evaluationOneProject\\"+pageContent+"\\"+"File" + i + ".pdf");
+		 
+		 in = new FileInputStream(oldFile); out = new FileOutputStream(newFile);
+		 
+		 byte[] moveBuff = new byte[1024];
+		  
+		 int butesRead;
+		 
+		  while ((butesRead = in.read(moveBuff)) > 0) { out.write(moveBuff, 0,
+		  butesRead); }
+		  
+		  in.close(); out.close();
+		 
+		 
+		  
+		  } System.out.println(i + "= " + count + pageContent); } count = 0; }
+		  
+		  }
 
 }
