@@ -27,7 +27,7 @@ Random random = new Random();
 boolean listFlag=true;
 
 
-
+/*
 System.out.println("enter words you want to add to your list and then to file ");
 while(listFlag) {
 usersInput.add(sc.nextLine());
@@ -73,22 +73,31 @@ for(Integer i =0 ;i<100;i++) {
 	
 	
 	
-}
+} */
 
-        PdfReader pdfReader = new PdfReader("File1.pdf");
-    
-    	int pages = pdfReader.getNumberOfPages(); 
-    	 
-    	//Iterate the pdf through pages.
-    	for(int i=1; i<=pages; i++) { 
-    	  //Extract the page content using PdfTextExtractor.
-    	  String pageContent = 
-    	  	PdfTextExtractor.getTextFromPage(pdfReader, i);
+for(int i =0 ;i<100;i++) {
+	   PdfReader pdfReader = new PdfReader("File"+i+".pdf");
+	    
+   	int pages = pdfReader.getNumberOfPages(); 
+   	 
+   
+   	String[] words=null;
+   	String n="";
+   	//Iterate the pdf through pages.
+   	for(int ii=1; ii<=pages; ii++) { 
+   	  //Extract the page content using PdfTextExtractor.
+   	
+   	  String pageContent = 
+   	  	PdfTextExtractor.getTextFromPage(pdfReader, ii);
+  
+   	  //Print the page content on console.
+   	  if(pageContent.equals("c++")) {
+   		System.out.println("Fffffffffff");
+   	  }
+         }
+	
+}
      
-    	  //Print the page content on console.
-    	  System.out.println("Content on Page "
-    	  		              + i + ": " + pageContent);
-          }
     }
 
 
