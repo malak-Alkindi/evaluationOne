@@ -17,48 +17,43 @@ import com.itextpdf.text.pdf.parser.clipper.Paths;
 
 public class pdfMain {
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Throwable {
 		// TODO Auto-generated method stub
 
 		Scanner scanner = new Scanner(System.in);
 		ArrayList<String> usersInputs = new ArrayList<>();
-		PdfWriterCreator pdfWriterCreatorObj=new PdfWriterCreator();
+		PdfWriterCreator pdfWriterCreatorObj = new PdfWriterCreator();
 		ArrayList<String> usersSearch = new ArrayList<>();
-	
 
+		boolean choisesFlag = true;
 
-
-		boolean choisesFlag=true;
-	
 		while (choisesFlag) {
-			System.out.println("what you want you want to do ?\n\na = write new pdfs \nb = sort exiting pdf files according to searching word \n"
-					+ "c = sort existing pdf files according to words matching \ncl = close");
-			String listChoise =scanner.nextLine().toLowerCase();
-if(listChoise.equals("a")) {
-	
-	pdfWriterCreatorObj.writeAParagraphs(true,usersInputs);
-	pdfWriterCreatorObj.createWriteOneHundredPdf(pdfWriterCreatorObj.getUsersInputs());
-}
-else if(listChoise.equals("b")) {
-	pdfWriterCreatorObj.searchThis(true,usersSearch);
-	pdfWriterCreatorObj.sortAccordingToWord();
-}
-else if(listChoise.equals("c")) {
-	pdfWriterCreatorObj.searchThis(true,usersSearch);
-	pdfWriterCreatorObj.sortAccordingToMatch();
-}
-else if(listChoise.equals("cl")) {
-	choisesFlag=false;
-	System.out.println("bye !!!!!");
-}
-else {
-    throw new Exception("unvalid input /enter again");
-    
-   
-}
-		
-		  
-		  
+			System.out.println(
+					"what you want you want to do ?\n\na = write new pdfs \nb = sort exiting pdf files according to searching word \n"
+							+ "c = sort existing pdf files according to words matching \ncl = close");
+			String listChoise = scanner.nextLine().toLowerCase();
+			if (listChoise.equals("a")) {
+
+				pdfWriterCreatorObj.writeAParagraphs(true, usersInputs);
+				pdfWriterCreatorObj.createWriteOneHundredPdf(pdfWriterCreatorObj.getUsersInputs());
+			} else if (listChoise.equals("b")) {
+				pdfWriterCreatorObj.searchThis(true, usersSearch);
+				pdfWriterCreatorObj.sortAccordingToWord();
+			} else if (listChoise.equals("c")) {
+				pdfWriterCreatorObj.searchThis(true, usersSearch);
+				pdfWriterCreatorObj.sortAccordingToMatch();
+			} else if (listChoise.equals("cl")) {
+				choisesFlag = false;
+				System.out.println("bye !!!!!");
+			} else {
+				throw new Exception("unvalid input /enter again");
+
+			}
+
+		}
+		System.gc();
+		Runtime.getRuntime().gc();
+		pdfWriterCreatorObj.finalize();
 	}
-	}
+	 
 }
